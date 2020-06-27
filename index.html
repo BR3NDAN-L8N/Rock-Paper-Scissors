@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script type="text/javascript">
+        
+        let playerChoice = "";
+        let computerChoice = "";
+        let numberOfWins = 0;
+        let numberOfTies = 0;
+
+
+        function playerChoose() {
+            playerChoice = prompt("Choose R, P, or S.");
+            playerChoice = playerChoice.toUpperCase();
+        }
+
+        function computerChoose() {
+            const num = Math.floor(Math.random() * 3);
+            if (num === 0) {
+                computerChoice = "R";
+            } else if (num === 1) {
+                computerChoice = "P";
+            } else {
+                computerChoice = "S";
+            }
+
+            console.log(computerChoice)
+        }
+
+        function decideWinner(player, computer) {
+            if (player === computer) {
+                alert(`You both picked ${player}`);
+                numberOfTies++;
+            } else {
+                switch(player + computer) {
+                    case "RS":
+                    case "PR":
+                    case "SP":
+                        alert(`WIN!!!!!!! Your ${player} beat the computers ${computer}`);
+                        numberOfWins++;
+                        return numberOfWins
+                        break;
+                    case "RP":
+                    case "PS":
+                    case "SR":
+                        alert(`LOSE :( Your ${player} lost to the computers ${computer}`);
+                        break;
+                }
+            }
+            
+        }
+
+        function playAgain() {
+            let keepPlaying = prompt("Do you want to play again?");
+            keepPlaying = keepPlaying.toUpperCase();
+            if (keepPlaying === "YES" || keepPlaying === "Y") {
+                game();
+            } else {
+                alert("Thanks for playing!")
+            }
+
+        }
+
+        function game() {
+            const numberOfGames = prompt("How many games do you want to play?")
+            for (i = 0; i < numberOfGames; i++){
+                playerChoose();
+                computerChoose();
+                decideWinner(playerChoice, computerChoice);
+        }
+
+            alert(`You won ${numberOfWins}, tied ${numberOfTies}, and lost ${numberOfGames - (numberOfWins + numberOfTies)} times`);
+            playAgain();
+        }
+        
+        game(); 
+
+    </script>
+</body>
+</html>
